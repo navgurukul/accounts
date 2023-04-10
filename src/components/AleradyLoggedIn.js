@@ -10,12 +10,10 @@ function AlreadyLoggedIn({ redirected, setRedirected }) {
     if (!redirected) {
       if (logout?.length > 0) {
         localStorage.removeItem("token");
-        window.open(`${redirectUrl}`, "_blank");
-        window.close();
+        window.location.href = `${redirectUrl}`;
         setRedirected(true);
       } else {
-        window.open(`${redirectUrl}/authenticate?token=${idToken}`, "_blank");
-        window.close();
+        window.location.href = `${redirectUrl}/authenticate?token=${idToken}`;
         setRedirected(true);
       }
     }

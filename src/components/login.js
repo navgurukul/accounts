@@ -11,9 +11,9 @@ function Login() {
   function onSignIn(googleUser) {
     let { id_token: idToken } = googleUser.getAuthResponse();
     localStorage.setItem("token", idToken);
-    window.open(`${redirectUrl}/authenticate?token=${idToken}`, "_blank");
-    window.open(``, "_blank").close();
-    setRedirected(true);
+    if (!redirected) {
+      window.location.href = `${redirectUrl}/authenticate?token=${idToken}`;
+    }
   }
   function isUserLoggedIn() {
     return {
