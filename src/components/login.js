@@ -55,8 +55,8 @@ function Login() {
           style={{
             backgroundColor: "white",
             color: "black",
-            margin: "10px 0",
-            fontSize: "18px",
+            margin: "10px 10px",
+            fontSize: "20px",
           }}
         >
           Log In with Google

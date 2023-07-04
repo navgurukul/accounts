@@ -14,36 +14,36 @@ function AlreadyLoggedIn({ redirected, setRedirected, }) {
      setOriginUrl(localStorage.getItem("prev"));
      console.log(idToken, user)
     console.log(user,"user details")
-    const message = {
-      type: "USER_LOGIN",
-      payload: {
-        token: idToken,
-        userDetails: user,
-      },
-    };
-    const iframeLoadHandler = () => {
-      const iframe = document.querySelector("iframe");
-      const window = iframe.contentWindow;
-      const targetOrigin = originUrl;
-      window.postMessage(message, targetOrigin);
-      return true
-    };
+    // const message = {
+    //   type: "USER_LOGIN",
+    //   payload: {
+    //     token: idToken,
+    //     userDetails: user,
+    //   },
+    // };
+    // const iframeLoadHandler = () => {
+    //   const iframe = document.querySelector("iframe");
+    //   const window = iframe.contentWindow;
+    //   const targetOrigin = originUrl;
+    //   window.postMessage(message, targetOrigin);
+    //   return true
+    // };
 
-    const iframe = document.querySelector("iframe");
-    iframe.addEventListener("load", iframeLoadHandler);
+    // const iframe = document.querySelector("iframe");
+    // iframe.addEventListener("load", iframeLoadHandler);
 
-    setTimeout(() => {
-    window.location.href = `${originUrl}login`
-    }, 6000);
+    // setTimeout(() => {
+    // window.location.href = `${originUrl}login`
+    // }, 6000);
 
 
-    return () => {
-      //cleanup
-      iframe.removeEventListener("load", iframeLoadHandler);
-      setTimeout(() => {
-        localStorage.clear()
-      }, 5000);
-    };
+    // return () => {
+    //   //cleanup
+    //   iframe.removeEventListener("load", iframeLoadHandler);
+    //   setTimeout(() => {
+    //     localStorage.clear()
+    //   }, 5000);
+    // };
   }, []);
 
   // useEffect(() => {
@@ -75,7 +75,7 @@ function AlreadyLoggedIn({ redirected, setRedirected, }) {
     <div>
       <h1>Already Logged In</h1>
 
-      <iframe style={{width:"0px",height:"0px"}} src={originUrl} title="Sub"></iframe>
+      {/* <iframe style={{width:"0px",height:"0px"}} src={originUrl} title="Sub"></iframe> */}
     </div>
   );
 }
