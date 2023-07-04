@@ -48,8 +48,7 @@ function Login() {
 
   return !isUserLoggedIn().isLoggedIn ? (
     <GoogleLogin
-   
-      clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+   clientId="34917283366-b806koktimo2pod1cjas8kn2lcpn7bse.apps.googleusercontent.com"
       buttonText="Log In with Google "
       onSuccess={onSignIn}
       render={(renderProps) => (
