@@ -18,7 +18,6 @@ function Login() {
       localStorage.clear()
        prevUrl = document.referrer;
       localStorage.setItem("prev", prevUrl)
-      console.log(process.env.REACT_APP_GOOGLE_CLIENT_ID)
     }, []);
   
 
@@ -49,10 +48,8 @@ function Login() {
 
   return !isUserLoggedIn().isLoggedIn ? (
     <GoogleLogin
-      clientId={
-        "34917283366-b806koktimo2pod1cjas8kn2lcpn7bse.apps.googleusercontent.com"
-      }
-      // clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+   
+      clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
       buttonText="Log In with Google "
       onSuccess={onSignIn}
       render={(renderProps) => (
