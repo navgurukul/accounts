@@ -10,32 +10,40 @@ function Login() {
   const [redirected, setRedirected] = useState(false);
   let prevUrl
 
-    useEffect(() => {
-      localStorage.clear()
-       prevUrl = document.referrer;
-      localStorage.setItem("prev", prevUrl)
-    }, []);
+    // useEffect(() => {
+    //   localStorage.clear()
+    //    prevUrl = document.referrer;
+    //   localStorage.setItem("prev", prevUrl)
+    // }, []);
+
+    function onSignIn(googleUser) {
+      let { id_token: idToken } = googleUser.getAuthResponse();
+      localStorage.setItem("token", idToken);
+      if (!redirected) {
+        window.location.href = `${redirectUrl}/authenticate?token=${idToken}`;
+      }
+    }
   
 
-  function onSignIn(googleUser) {
-    let { id_token: idToken } = googleUser.getAuthResponse(); 
+  // function onSignIn(googleUser) {
+  //   let { id_token: idToken } = googleUser.getAuthResponse(); 
     
-    let profile = googleUser.getBasicProfile();
-    const googleData = {
-      id: profile.getId(),
-      name: profile.getName(),
-      imageUrl: profile.getImageUrl(),
-      email: profile.getEmail(),
-      idToken,
-    };
-    localStorage.setItem("user", JSON.stringify(googleData))
+  //   let profile = googleUser.getBasicProfile();
+  //   const googleData = {
+  //     id: profile.getId(),
+  //     name: profile.getName(),
+  //     imageUrl: profile.getImageUrl(),
+  //     email: profile.getEmail(),
+  //     idToken,
+  //   };
+  //   localStorage.setItem("user", JSON.stringify(googleData))
 
-    localStorage.setItem("token", idToken);
-    if (!redirected ) {
-      window.location.href = `authenticate?token=${idToken}`;
+  //   localStorage.setItem("token", idToken);
+  //   if (!redirected ) {
+  //     window.location.href = `authenticate?token=${idToken}`;
 
-    }
-  }
+  //   }
+  // }
   function isUserLoggedIn() {
     return {
       isLoggedIn: localStorage.getItem("token")?.length > 0,
