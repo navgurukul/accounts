@@ -8,7 +8,6 @@ function Login() {
   const searchParams = urlParams.searchParams;
   const redirectUrl = searchParams.get("redirectUrl");
   const [redirected, setRedirected] = useState(false);
-  const [loggedIn, setLoggedIn] = useState(false)
   let prevUrl
 
     useEffect(() => {
@@ -32,8 +31,9 @@ function Login() {
     localStorage.setItem("user", JSON.stringify(googleData))
 
     localStorage.setItem("token", idToken);
-    if (!redirected) {
-      window.location.href = `${redirectUrl}/authenticate?token=${idToken}`;
+    if (!redirected ) {
+      window.location.href = `authenticate?token=${idToken}`;
+
     }
   }
   function isUserLoggedIn() {
