@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { GoogleLogout } from "react-google-login";
-// import { useNavigate } from "react-router-dom";
 
 function AlreadyLoggedIn({ redirected, setRedirected, }) {
   const urlParams = new URL(document.location.href);
   const searchParams = urlParams.searchParams;
   const logout = searchParams.get("logout");
   let [originUrl, setOriginUrl] = useState(localStorage.getItem("prev")) 
-  // const redirectUrl = searchParams.get("redirectUrl");
-  // const navigate = useNavigate();
 
   useEffect(() => {
     const idToken = localStorage.getItem("token");
+  
     let user = JSON.parse(localStorage.getItem("user"));
      setOriginUrl(localStorage.getItem("prev"));
+     console.log(idToken, user)
     console.log(user,"user details")
     const message = {
       type: "USER_LOGIN",
@@ -32,8 +31,6 @@ function AlreadyLoggedIn({ redirected, setRedirected, }) {
 
     const iframe = document.querySelector("iframe");
     iframe.addEventListener("load", iframeLoadHandler);
-    // console.log(window.history.previous.href)
-    // window.history.go(-3)
 
     setTimeout(() => {
     window.location.href = `${originUrl}login`

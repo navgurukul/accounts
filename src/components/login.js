@@ -12,9 +12,6 @@ function Login() {
   let prevUrl
 
     useEffect(() => {
-      // const referringPageOrigin = new URL(document.referrer).origin;
-      // console.log("Referring Page Origin:", referringPageOrigin);
-      // setOrigin(referringPageOrigin)
       localStorage.clear()
        prevUrl = document.referrer;
       localStorage.setItem("prev", prevUrl)
