@@ -9,14 +9,13 @@ function Login() {
   const redirectUrl = searchParams.get("redirectUrl");
   const [redirected, setRedirected] = useState(false);
   let prevUrl
+  
 
     // useEffect(() => {
     //   localStorage.clear()
     //    prevUrl = document.referrer;
     //   localStorage.setItem("prev", prevUrl)
     // }, []);
-
-    
 
     function onSignIn(googleUser) {
       let { id_token: idToken } = googleUser.getAuthResponse();
