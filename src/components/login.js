@@ -15,6 +15,7 @@ function Login() {
       localStorage.clear()
        prevUrl = document.referrer;
       localStorage.setItem("prev", prevUrl)
+    
     }, []);
 
 
