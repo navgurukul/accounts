@@ -60,7 +60,7 @@ function AlreadyLoggedIn() {
     <div>
       <h1>Already Logged In</h1>
 
-      <iframe style={{width:"0px",height:"0px"}} src={originUrl} title="Sub"></iframe>
+      <iframe style={{width:"300px",height:"300px"}} src={originUrl} title="Sub"></iframe>
     </div>
   );
 }

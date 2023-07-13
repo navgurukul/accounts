@@ -69,6 +69,7 @@ function Login() {
             color: "black",
             margin: "10px 10px",
             fontSize: "20px",
+            cursor:"pointer"
           }}
         >
           Log In with Google
