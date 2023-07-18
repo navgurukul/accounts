@@ -49,14 +49,14 @@ function AlreadyLoggedIn() {
     };
     const iframe = document.querySelector('iframe');
     const window = iframe.contentWindow;
-    const targetOrigin = originUrl;
+    const targetOrigin = "https://sso-login.d3laxofjrudx9j.amplifyapp.com";
     window.postMessage(message, targetOrigin);
   }, []);
   return (
     <div>
       <h1>Already Logged In</h1>
 
-      <iframe style={{width:"300px",height:"300px"}} src={originUrl} title="Sub"></iframe>
+      <iframe style={{width:"300px",height:"300px"}} src="https://sso-login.d3laxofjrudx9j.amplifyapp.com/login" title="Sub"></iframe>
     </div>
   );
 }
