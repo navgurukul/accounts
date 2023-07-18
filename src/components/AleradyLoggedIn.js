@@ -22,15 +22,21 @@ function AlreadyLoggedIn() {
       const window = iframe.contentWindow;
       const targetOrigin = originUrl;
       window.postMessage(message, targetOrigin);
+
+      const urlScratch = "https://sso-login.d3laxofjrudx9j.amplifyapp.com";
+      const scratchFrame = document.querySelector("#scratch").contentWindow;
+      const scratchWindow = scratchFrame.contentWindow;
+      const scratchTargetUrl = urlScratch;
+      scratchWindow.postMessage(message, scratchTargetUrl);
       return true
     };
 
     const iframe = document.querySelector("iframe");
     iframe.addEventListener("load", iframeLoadHandler);
 
-    // setTimeout(() => {
-    // window.location.href = `${originUrl}login`
-    // }, 6000);
+    setTimeout(() => {
+    window.location.href = `${originUrl}login`
+    }, 10000);
 
 
     return () => {
@@ -58,6 +64,8 @@ function AlreadyLoggedIn() {
     <div>
       <h1>Already Logged In</h1>
       <iframe style={{width:"300px",height:"300px"}} src="https://meraki-k069df6h5-meraki-dev.vercel.app/" title="Sub"></iframe>
+      
+      <iframe style={{width:"300px",height:"300px"}} id="scratch" src="https://sso-login.d3laxofjrudx9j.amplifyapp.com/" title="Sub"></iframe>
     </div>
   );
 }
