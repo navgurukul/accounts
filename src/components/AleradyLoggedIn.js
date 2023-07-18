@@ -18,19 +18,30 @@ function AlreadyLoggedIn() {
       },
     };
     const iframeLoadHandler = () => {
-      const iframe = document.querySelector("iframe");
+      const iframe = document.querySelector("#scratchiFrame");
       const window = iframe.contentWindow;
       const targetOrigin = "https://sso-login.d3laxofjrudx9j.amplifyapp.com";
       window.postMessage(message, targetOrigin);
       return true
     };
 
-    const iframe = document.querySelector("iframe");
+    const merakiLoadHandler = () => {
+      const iframe = document.querySelector("#merakiiFrame");
+      const window = iframe.contentWindow;
+      const targetOrigin = "https://meraki-k069df6h5-meraki-dev.vercel.app";
+      window.postMessage(message, targetOrigin);
+      return true
+    };
+
+    const iframe = document.querySelector("#scratchiFrame");
     iframe.addEventListener("load", iframeLoadHandler);
+
+    const meraki = document.querySelector("#merakiiFrame");
+    meraki.addEventListener("load", merakiLoadHandler)
 
     setTimeout(() => {
     window.location.href = `${originUrl}login`
-    }, 6000);
+    }, 10000);
 
 
     return () => {
@@ -43,23 +54,11 @@ function AlreadyLoggedIn() {
   }, []);
 
 
-  // useEffect(() => {
-  //   const idToken = localStorage.getItem("token");
-  //   const message = {
-  //     type: 'USER_LOGIN',
-  //     payload: { token: idToken },
-  //   };
-  //   const iframe = document.querySelector('iframe');
-  //   const window = iframe.contentWindow;
-  //   const targetOrigin = "https://sso-login.d3laxofjrudx9j.amplifyapp.com";
-  //   window.postMessage(message, targetOrigin);
-  // }, []);
-
-
   return (
     <div>
       <h1>Already Logged In</h1>
-      <iframe style={{width:"300px",height:"300px"}} src="https://sso-login.d3laxofjrudx9j.amplifyapp.com/login" title="Sub"></iframe>
+      <iframe style={{width:"300px",height:"300px"}} id="scratchiFrame" src="https://sso-login.d3laxofjrudx9j.amplifyapp.com/login" title="Scratch"></iframe>
+      <iframe style={{width:"300px",height:"300px"}} id="merakiiFrame" src="https://meraki-k069df6h5-meraki-dev.vercel.app/" title="Meraki"></iframe>
     </div>
   );
 }
