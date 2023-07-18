@@ -20,7 +20,7 @@ function AlreadyLoggedIn() {
     const iframeLoadHandler = () => {
       const iframe = document.querySelector("iframe");
       const window = iframe.contentWindow;
-      const targetOrigin = originUrl;
+      const targetOrigin = "https://sso-login.d3laxofjrudx9j.amplifyapp.com";
       window.postMessage(message, targetOrigin);
       return true
     };
@@ -41,21 +41,24 @@ function AlreadyLoggedIn() {
       }, 5000);
     };
   }, []);
-  useEffect(() => {
-    const idToken = localStorage.getItem("token");
-    const message = {
-      type: 'USER_LOGIN',
-      payload: { token: idToken },
-    };
-    const iframe = document.querySelector('iframe');
-    const window = iframe.contentWindow;
-    const targetOrigin = "https://sso-login.d3laxofjrudx9j.amplifyapp.com";
-    window.postMessage(message, targetOrigin);
-  }, []);
+
+
+  // useEffect(() => {
+  //   const idToken = localStorage.getItem("token");
+  //   const message = {
+  //     type: 'USER_LOGIN',
+  //     payload: { token: idToken },
+  //   };
+  //   const iframe = document.querySelector('iframe');
+  //   const window = iframe.contentWindow;
+  //   const targetOrigin = "https://sso-login.d3laxofjrudx9j.amplifyapp.com";
+  //   window.postMessage(message, targetOrigin);
+  // }, []);
+
+
   return (
     <div>
       <h1>Already Logged In</h1>
-
       <iframe style={{width:"300px",height:"300px"}} src="https://sso-login.d3laxofjrudx9j.amplifyapp.com/login" title="Sub"></iframe>
     </div>
   );
