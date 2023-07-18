@@ -4,13 +4,19 @@ function AlreadyLoggedIn() {
   const urlParams = new URL(document.location.href);
   const searchParams = urlParams.searchParams;
   const logout = searchParams.get("logout");
-  let [originUrl, setOriginUrl] = useState(localStorage.getItem("prev")) 
+  let [originUrl, setOriginUrl] = useState(localStorage.getItem("prev"))
+
+  const iframe = document.querySelector("meraki");
+  const iframeScratch = document.querySelector("#scratch");
+
+  const url = "https://meraki-k069df6h5-meraki-dev.vercel.app/"
+  const urlScratch = "https://sso-login.d3laxofjrudx9j.amplifyapp.com"
 
   useEffect(() => {
     const idToken = localStorage.getItem("token");
     let user = JSON.parse(localStorage.getItem("user"));
-    console.log(user,  originUrl,"user")
-     setOriginUrl(localStorage.getItem("prev"));
+    console.log(user, originUrl, "user")
+    setOriginUrl(localStorage.getItem("prev"));
     const message = {
       type: "USER_LOGIN",
       payload: {
@@ -18,19 +24,22 @@ function AlreadyLoggedIn() {
         userDetails: user,
       },
     };
-    const iframeLoadHandler = () => {
-      const iframe = document.querySelector("iframe");
+    const iframeLoadHandler = (url) => {
+      // const iframe = document.querySelector("iframe");
+
       const window = iframe.contentWindow;
-      const targetOrigin = originUrl;
+      const scratchWindow = iframeScratch.contentWindow;
+      const targetOrigin = url;
+      const scratchTargetUrl = urlScratch;
       window.postMessage(message, targetOrigin);
+      scratchWindow.postMessage(message, scratchTargetUrl);
       return true
     };
 
-    const iframe = document.querySelector("iframe");
     iframe.addEventListener("load", iframeLoadHandler);
 
     setTimeout(() => {
-    window.location.href = `${originUrl}login`
+      window.location.href = `${originUrl}login`
     }, 6000);
 
 
@@ -60,7 +69,9 @@ function AlreadyLoggedIn() {
     <div>
       <h1>Already Logged In</h1>
 
-      <iframe style={{width:"300px",height:"300px"}} src={originUrl} title="Sub"></iframe>
+      <iframe style={{ width: "300px", height: "300px" }} id="meraki" src={url} title="Sub"></iframe>
+
+      <iframe style={{ width: "300px", height: "300px" }} id="scratch" src={urlScratch} title="Sub"></iframe>
     </div>
   );
 }
