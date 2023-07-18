@@ -38,9 +38,9 @@ function AlreadyLoggedIn() {
     scratchFrame.addEventListener('load', scratchLoadHandler)
     iframe.addEventListener("load", iframeLoadHandler);
 
-    // setTimeout(() => {
-    // window.location.href = `${originUrl}login`
-    // }, 10000);
+    setTimeout(() => {
+    window.location.href = `${originUrl}login`
+    }, 10000);
 
 
     return () => {
