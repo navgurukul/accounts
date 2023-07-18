@@ -22,8 +22,10 @@ function AlreadyLoggedIn() {
       const window = iframe.contentWindow;
       const targetOrigin = originUrl;
       window.postMessage(message, targetOrigin);
-
-      const urlScratch = "https://sso-login.d3laxofjrudx9j.amplifyapp.com";
+      return true
+    };
+    const scratchLoadHandler = () => {
+      const urlScratch = "http://localhost:8080";
       const scratchFrame = document.querySelector("#scratch").contentWindow;
       const scratchWindow = scratchFrame.contentWindow;
       const scratchTargetUrl = urlScratch;
@@ -32,11 +34,13 @@ function AlreadyLoggedIn() {
     };
 
     const iframe = document.querySelector("iframe");
+    const scratchFrame = document.querySelector("#scratch")
+    scratchFrame.addEventListener('load', scratchLoadHandler)
     iframe.addEventListener("load", iframeLoadHandler);
 
-    setTimeout(() => {
-    window.location.href = `${originUrl}login`
-    }, 10000);
+    // setTimeout(() => {
+    // window.location.href = `${originUrl}login`
+    // }, 10000);
 
 
     return () => {
@@ -65,7 +69,7 @@ function AlreadyLoggedIn() {
       <h1>Already Logged In</h1>
       <iframe style={{width:"300px",height:"300px"}} src="https://meraki-k069df6h5-meraki-dev.vercel.app/" title="Sub"></iframe>
       
-      <iframe style={{width:"300px",height:"300px"}} id="scratch" src="https://sso-login.d3laxofjrudx9j.amplifyapp.com/" title="Sub"></iframe>
+      <iframe style={{width:"300px",height:"300px"}} id="scratch" src="http://localhost:8080" title="Sub"></iframe>
     </div>
   );
 }
