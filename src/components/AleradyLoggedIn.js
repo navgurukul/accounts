@@ -28,7 +28,7 @@ function AlreadyLoggedIn() {
     const merakiLoadHandler = () => {
       const iframe = document.querySelector("#merakiiFrame");
       const window = iframe.contentWindow;
-      const targetOrigin = "https://meraki-dev-git-sso-login-meraki-dev.vercel.app/";
+      const targetOrigin = "https://sso-login.dkchei85ij0cu.amplifyapp.com/";
       window.postMessage(message, targetOrigin);
       return true
     };
@@ -58,7 +58,7 @@ function AlreadyLoggedIn() {
     <div>
       <h1>Already Logged In</h1>
       {/* <iframe style={{width:"300px",height:"300px"}} id="scratchiFrame" src="https://sso-login.d3laxofjrudx9j.amplifyapp.com/login" title="Scratch"></iframe> */}
-      <iframe style={{width:"300px",height:"300px"}} id="merakiiFrame" src="https://meraki-dev-git-sso-login-meraki-dev.vercel.app/" title="Meraki"></iframe>
+      <iframe style={{width:"300px",height:"300px"}} id="merakiiFrame" src="https://sso-login.dkchei85ij0cu.amplifyapp.com/" title="Meraki"></iframe>
     </div>
   );
 }
