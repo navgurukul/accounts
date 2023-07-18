@@ -17,13 +17,13 @@ function AlreadyLoggedIn() {
         userDetails: user,
       },
     };
-    // const iframeLoadHandler = () => {
-    //   const iframe = document.querySelector("#scratchiFrame");
-    //   const window = iframe.contentWindow;
-    //   const targetOrigin = "https://sso-login.d3laxofjrudx9j.amplifyapp.com";
-    //   window.postMessage(message, targetOrigin);
-    //   return true
-    // };
+    const iframeLoadHandler = () => {
+      const iframe = document.querySelector("#scratchiFrame");
+      const window = iframe.contentWindow;
+      const targetOrigin = "https://sso-login.d3laxofjrudx9j.amplifyapp.com";
+      window.postMessage(message, targetOrigin);
+      return true
+    };
 
     const merakiLoadHandler = () => {
       const iframe = document.querySelector("#merakiiFrame");
@@ -33,8 +33,8 @@ function AlreadyLoggedIn() {
       return true
     };
 
-    // const iframe = document.querySelector("#scratchiFrame");
-    // iframe.addEventListener("load", iframeLoadHandler);
+    const iframe = document.querySelector("#scratchiFrame");
+    iframe.addEventListener("load", iframeLoadHandler);
 
     const meraki = document.querySelector("#merakiiFrame");
     meraki.addEventListener("load", merakiLoadHandler)
@@ -44,20 +44,20 @@ function AlreadyLoggedIn() {
     }, 10000);
 
 
-    // return () => {
-    //   //cleanup
-    //   iframe.removeEventListener("load", iframeLoadHandler);
-    //   setTimeout(() => {
-    //     localStorage.clear()
-    //   }, 5000);
-    // };
+    return () => {
+      //cleanup
+      iframe.removeEventListener("load", iframeLoadHandler);
+      setTimeout(() => {
+        localStorage.clear()
+      }, 5000);
+    };
   }, []);
 
 
   return (
     <div>
       <h1>Already Logged In</h1>
-      {/* <iframe style={{width:"300px",height:"300px"}} id="scratchiFrame" src="https://sso-login.d3laxofjrudx9j.amplifyapp.com/login" title="Scratch"></iframe> */}
+      <iframe style={{width:"300px",height:"300px"}} id="scratchiFrame" src="https://sso-login.d3laxofjrudx9j.amplifyapp.com/login" title="Scratch"></iframe>
       <iframe style={{width:"300px",height:"300px"}} id="merakiiFrame" src="https://sso-login.dkchei85ij0cu.amplifyapp.com/" title="Meraki"></iframe>
     </div>
   );
