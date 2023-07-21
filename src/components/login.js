@@ -26,7 +26,7 @@ function Login() {
       var response = event.data;
       setcount((prev) => prev + 1);
     } else {
-      console.warn("Unauthorized application sending response");
+      console.warn("Unauthorized application sending response" , event.origin);
     }
   });
 
@@ -104,13 +104,13 @@ function Login() {
         cookiePolicy={"single_host_origin"}
       />
       <iframe
-        style={{ width: "1px", height: "1px" }}
+        style={{ width: "301px", height: "301px" }}
         id="scratchiFrame"
         src="https://sso-login.d3laxofjrudx9j.amplifyapp.com/login"
         title="Scratch"
       ></iframe>
       <iframe
-        style={{ width: "1px", height: "1px" }}
+        style={{ width: "301px", height: "301px" }}
         id="merakiiFrame"
         src="https://sso-login.dkchei85ij0cu.amplifyapp.com/"
         title="Meraki"
