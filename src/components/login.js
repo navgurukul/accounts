@@ -28,14 +28,15 @@ function Login() {
   window.addEventListener('message', function (event) {
     console.log(event.origin, "event origins")
 
-    if (event.origin !== 'https://sso-login.dkchei85ij0cu.amplifyapp.com' || event.origin !== 'https://sso-login.d3laxofjrudx9j.amplifyapp.com') {
-      console.warn('Unauthorized message origin. Ignoring the message.');
-      return;
+    if (event.origin=='https://sso-login.dkchei85ij0cu.amplifyapp.com' || event.origin == 'https://sso-login.d3laxofjrudx9j.amplifyapp.com') {
+      var response = event.data;
+      setcount((prev) => prev + 1)
+      console.log('Received response from receiver:', JSON.stringify(response));
     }
-    // Display the response received from the receiver
-    var response = event.data;
-    setcount((prev) => prev + 1)
-    console.log('Received response from receiver:', JSON.stringify(response));
+
+    else{
+      console.warn("Unauthorized website sendingg response")
+    }
   });
 
 
