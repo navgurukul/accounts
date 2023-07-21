@@ -106,9 +106,9 @@ function Login() {
 
 
 
-    setTimeout(() => {
-      window.location.href = `${originUrl}login`
-    }, 3000);
+    // setTimeout(() => {
+    //   window.location.href = `${originUrl}login`
+    // }, 3000);
 
 
 
