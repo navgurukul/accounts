@@ -26,6 +26,7 @@ function Login() {
 
 
   window.addEventListener('message', function (event) {
+    console.log(event.origin, "event origins")
 
     if (event.origin !== 'https://sso-login.dkchei85ij0cu.amplifyapp.com' || event.origin !== 'https://sso-login.d3laxofjrudx9j.amplifyapp.com') {
       console.warn('Unauthorized message origin. Ignoring the message.');
