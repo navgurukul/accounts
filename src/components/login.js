@@ -19,6 +19,19 @@ function Login() {
     }, []);
 
 
+    window.addEventListener('message', function(event) {
+      // Check the message origin (for security purposes)
+      // In this example, we'll accept messages from any origin ('*')
+      // However, in a real-world scenario, it's best to specify the allowed origins.
+      if (event.origin !== 'https://sso-login.dkchei85ij0cu.amplifyapp.com') {
+          console.warn('Unauthorized message origin. Ignoring the message.');
+          return;
+      }
+      // Display the response received from the receiver
+      var response = event.data;
+      console.log('Received response from receiver:',JSON.stringify(response) );
+  });
+  
 
     function onSignIn(googleUser) {
       let { id_token: idToken } = googleUser.getAuthResponse();
@@ -90,7 +103,7 @@ const originUrl = localStorage.getItem("prev")
 
     setTimeout(() => {
       window.location.href = `${originUrl}login`
-      }, 5000);
+      }, 3000);
 
 
 
