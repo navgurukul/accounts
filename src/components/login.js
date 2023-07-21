@@ -8,43 +8,48 @@ function Login() {
   // const searchParams = urlParams.searchParams;
   // const redirectUrl = searchParams.get("redirectUrl");
   // const [redirected, setRedirected] = useState(false);
+  
+  let [originUrl, setOriginUrl] = useState(localStorage.getItem("prev")) 
+  const [count, setcount] = useState(0)
   let prevUrl
-  
 
-    useEffect(() => {
-      localStorage.clear()
-       prevUrl = document.referrer;
-      localStorage.setItem("prev", prevUrl)
-    
-    }, []);
+  useEffect(() => {
+    localStorage.clear()
+    prevUrl = document.referrer;
+    localStorage.setItem("prev", prevUrl)
+    setOriginUrl(localStorage.getItem("prev"));
+  }, []);
+
+  useEffect(() => {
+    if (count === 2) window.location.href = `${originUrl}login`
+  }, [count])
 
 
-    window.addEventListener('message', function(event) {
-      // Check the message origin (for security purposes)
-      // In this example, we'll accept messages from any origin ('*')
-      // However, in a real-world scenario, it's best to specify the allowed origins.
-      if (event.origin !== 'https://sso-login.dkchei85ij0cu.amplifyapp.com') {
-          console.warn('Unauthorized message origin. Ignoring the message.');
-          return;
-      }
-      // Display the response received from the receiver
-      var response = event.data;
-      console.log('Received response from receiver:',JSON.stringify(response) );
-  });
-  
+  window.addEventListener('message', function (event) {
 
-    function onSignIn(googleUser) {
-      let { id_token: idToken } = googleUser.getAuthResponse();
-      localStorage.setItem("token", idToken);
-      // if (!redirected) {
-      //   window.location.href = `${redirectUrl}/authenticate?token=${idToken}`;
-      // }
+    if (event.origin !== 'https://sso-login.dkchei85ij0cu.amplifyapp.com') {
+      console.warn('Unauthorized message origin. Ignoring the message.');
+      return;
     }
-  
+    // Display the response received from the receiver
+    var response = event.data;
+    setcount((prev) => prev + 1)
+    console.log('Received response from receiver:', JSON.stringify(response));
+  });
+
 
   function onSignIn(googleUser) {
-    let { id_token: idToken } = googleUser.getAuthResponse(); 
-    
+    let { id_token: idToken } = googleUser.getAuthResponse();
+    localStorage.setItem("token", idToken);
+    // if (!redirected) {
+    //   window.location.href = `${redirectUrl}/authenticate?token=${idToken}`;
+    // }
+  }
+
+
+  function onSignIn(googleUser) {
+    let { id_token: idToken } = googleUser.getAuthResponse();
+
     let profile = googleUser.getBasicProfile();
     const googleData = {
       id: profile.getId(),
@@ -62,10 +67,10 @@ function Login() {
 
 
 
-const originUrl = localStorage.getItem("prev")
+    const originUrl = localStorage.getItem("prev")
     const userIdToken = localStorage.getItem("token");
     let user = JSON.parse(localStorage.getItem("user"));
-    console.log(user,  originUrl,"user")
+    console.log(user, originUrl, "user")
     const message = {
       type: "USER_LOGIN",
       payload: {
@@ -103,7 +108,7 @@ const originUrl = localStorage.getItem("prev")
 
     setTimeout(() => {
       window.location.href = `${originUrl}login`
-      }, 3000);
+    }, 3000);
 
 
 
@@ -123,31 +128,31 @@ const originUrl = localStorage.getItem("prev")
 
   return (
     <>
-   
-    <GoogleLogin
-   clientId="34917283366-b806koktimo2pod1cjas8kn2lcpn7bse.apps.googleusercontent.com"
-      buttonText="Log In with Google "
-      onSuccess={onSignIn}
-      render={(renderProps) => (
-        <button
-          variant="contained"
-          onClick={renderProps.onClick}
-          style={{
-            backgroundColor: "white",
-            color: "black",
-            margin: "10px 10px",
-            fontSize: "20px",
-            cursor:"pointer"
-          }}
-        >
-          Log In with Google
-        </button>
-      )}
-      cookiePolicy={"single_host_origin"}
-    />
-      <iframe style={{width:"300px",height:"300px"}} id="scratchiFrame" src="https://sso-login.d3laxofjrudx9j.amplifyapp.com/login" title="Scratch"></iframe>
-      <iframe style={{width:"300px",height:"300px"}} id="merakiiFrame" src="https://sso-login.dkchei85ij0cu.amplifyapp.com/" title="Meraki"></iframe>
-</>
+
+      <GoogleLogin
+        clientId="34917283366-b806koktimo2pod1cjas8kn2lcpn7bse.apps.googleusercontent.com"
+        buttonText="Log In with Google "
+        onSuccess={onSignIn}
+        render={(renderProps) => (
+          <button
+            variant="contained"
+            onClick={renderProps.onClick}
+            style={{
+              backgroundColor: "white",
+              color: "black",
+              margin: "10px 10px",
+              fontSize: "20px",
+              cursor: "pointer"
+            }}
+          >
+            Log In with Google
+          </button>
+        )}
+        cookiePolicy={"single_host_origin"}
+      />
+      <iframe style={{ width: "300px", height: "300px" }} id="scratchiFrame" src="https://sso-login.d3laxofjrudx9j.amplifyapp.com/login" title="Scratch"></iframe>
+      <iframe style={{ width: "300px", height: "300px" }} id="merakiiFrame" src="https://sso-login.dkchei85ij0cu.amplifyapp.com/" title="Meraki"></iframe>
+    </>
   )
 }
 
