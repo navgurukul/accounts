@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
 import GoogleLogin from "react-google-login";
+import './style.css'
+import backgroundImg from './assets/background.png'
+import logo from './assets/logo.svg';
+import googleImg from './assets/google.svg'
 
 function Login() {
   let [originUrl, setOriginUrl] = useState(localStorage.getItem("prev"));
@@ -26,7 +30,7 @@ function Login() {
       var response = event.data;
       setcount((prev) => prev + 1);
     } else {
-      console.warn("Unauthorized application sending response" , event.origin);
+      console.warn("Unauthorized application sending response", event.origin);
     }
   });
 
@@ -46,13 +50,8 @@ function Login() {
       email: profile.getEmail(),
       idToken,
     };
-    // localStorage.setItem("user", JSON.stringify(googleData));
-
-    // localStorage.setItem("token", idToken);
 
     const originUrl = localStorage.getItem("prev");
-    // const userIdToken = localStorage.getItem("token");
-    // let user = JSON.parse(localStorage.getItem("user"));
     const message = {
       type: "USER_LOGIN",
       payload: {
@@ -86,39 +85,45 @@ function Login() {
 
   return (
     <>
-      <GoogleLogin
-        clientId="34917283366-b806koktimo2pod1cjas8kn2lcpn7bse.apps.googleusercontent.com"
-        buttonText="Log In with Google "
-        onSuccess={onSignIn}
-        render={(renderProps) => (
-          <button
-            variant="contained"
-            onClick={renderProps.onClick}
-            style={{
-              backgroundColor: "white",
-              color: "black",
-              margin: "10px 10px",
-              fontSize: "20px",
-              cursor: "pointer",
-            }}
-          >
-            Log In with Google
-          </button>
-        )}
-        cookiePolicy={"single_host_origin"}
-      />
-      <iframe
-        style={{ width: "301px", height: "301px" }}
-        id="scratchiFrame"
-        src="https://sso-login.d3laxofjrudx9j.amplifyapp.com/login"
-        title="Scratch"
-      ></iframe>
-      <iframe
-        style={{ width: "301px", height: "301px" }}
-        id="merakiiFrame"
-        src="https://sso-login.dkchei85ij0cu.amplifyapp.com/"
-        title="Meraki"
-      ></iframe>
+      <div className="container">
+        <img id="backgroundImg" src={backgroundImg} alt="" />
+        <div id="login-container">
+
+          <img id="ng-logo" src={logo} alt="" />
+          <h2 id="learn-heading">Embark On Your Learning Journey</h2>
+
+          <h5>Continue to Meraki</h5>
+          <GoogleLogin
+            clientId="34917283366-b806koktimo2pod1cjas8kn2lcpn7bse.apps.googleusercontent.com"
+            buttonText="Log In with Google "
+            onSuccess={onSignIn}
+            render={(renderProps) => (
+              <button
+                variant="contained"
+                onClick={renderProps.onClick}
+                id="login-button"
+              >
+                <img id="login-image" src={googleImg} alt="" />
+              </button>
+            )}
+            cookiePolicy={"single_host_origin"}
+          />
+
+        </div>
+        <iframe
+
+          id="scratchiFrame"
+          src="https://sso-login.d3laxofjrudx9j.amplifyapp.com/login"
+          title="Scratch"
+        ></iframe>
+        <iframe
+
+          id="merakiiFrame"
+          src="https://sso-login.dkchei85ij0cu.amplifyapp.com/"
+          title="Meraki"
+        ></iframe>
+
+      </div>
     </>
   );
 }
