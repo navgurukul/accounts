@@ -61,6 +61,7 @@ const originUrl = localStorage.getItem("prev")
       },
     };
     const iframeLoadHandler = () => {
+      console.log("fucntion is running")
       const iframe = document.querySelector("#scratchiFrame");
       const window = iframe.contentWindow;
       const targetOrigin = "https://sso-login.d3laxofjrudx9j.amplifyapp.com";
@@ -76,11 +77,13 @@ const originUrl = localStorage.getItem("prev")
       return true
     };
 
-    const iframe = document.querySelector("#scratchiFrame");
-    iframe.addEventListener("load", iframeLoadHandler);
+    iframeLoadHandler()
+    merakiLoadHandler()
+    // const iframe = document.querySelector("#scratchiFrame");
+    // iframe.addEventListener("load", iframeLoadHandler);
 
-    const meraki = document.querySelector("#merakiiFrame");
-    meraki.addEventListener("load", merakiLoadHandler)
+    // const meraki = document.querySelector("#merakiiFrame");
+    // meraki.addEventListener("load", merakiLoadHandler)
 
 
 
