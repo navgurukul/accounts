@@ -29,8 +29,11 @@ function Login() {
       event.origin == "https://sso-login.dkchei85ij0cu.amplifyapp.com" ||
       event.origin == "https://sso-login.d3laxofjrudx9j.amplifyapp.com"
     ) {
-      var response = event.data;
       setcount((prev) => prev + 1);
+      setTimeout(() => {
+        localStorage.clear()
+        window.location.href = `${originUrl}login`
+      }, 3000);
     } else {
       console.warn("Unauthorized application sending response", event.origin);
     }
@@ -63,6 +66,7 @@ function Login() {
     };
     setLoading(true)
     const iframeLoadHandler = () => {
+      console.log(message, "message to be posterd")
       const iframe = document.querySelector("#scratchiFrame");
       const window = iframe.contentWindow;
       const targetOrigin = "https://sso-login.d3laxofjrudx9j.amplifyapp.com";
@@ -71,6 +75,7 @@ function Login() {
     };
 
     const merakiLoadHandler = () => {
+      console.log(message, "message to be posted from meraki")
       const iframe = document.querySelector("#merakiiFrame");
       const window = iframe.contentWindow;
       const targetOrigin = "https://sso-login.dkchei85ij0cu.amplifyapp.com/";
@@ -78,12 +83,10 @@ function Login() {
       return true;
     };
 
+    console.log(iframeLoadHandler(),merakiLoadHandler(), "i r=frame load handler")
     iframeLoadHandler();
     merakiLoadHandler();
-    setTimeout(() => {
-      localStorage.clear()
-      window.location.href = `${originUrl}login`
-    }, 2000);
+
   }
 
   return (
@@ -115,22 +118,19 @@ function Login() {
               />
 
             </div>
-            <iframe
-
+    
+          </div>
+      }
+        <iframe
               id="scratchiFrame"
               src="https://sso-login.d3laxofjrudx9j.amplifyapp.com/login"
               title="Scratch"
             ></iframe>
             <iframe
-
               id="merakiiFrame"
               src="https://sso-login.dkchei85ij0cu.amplifyapp.com/"
               title="Meraki"
             ></iframe>
-
-          </div>
-      }
-
     </>
   );
 }

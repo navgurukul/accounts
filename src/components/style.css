@@ -1,10 +1,7 @@
 #scratchiFrame,
 #merakiiFrame {
-  width: 1px;
-  height: 1px;
-  position: absolute;
-  top: 0;
-  right: 0;
+  width: 300px;
+  height: 300px;
 }
 .container {
   width: 884.5px;
