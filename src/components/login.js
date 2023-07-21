@@ -8,8 +8,8 @@ function Login() {
   // const searchParams = urlParams.searchParams;
   // const redirectUrl = searchParams.get("redirectUrl");
   // const [redirected, setRedirected] = useState(false);
-  
-  let [originUrl, setOriginUrl] = useState(localStorage.getItem("prev")) 
+
+  let [originUrl, setOriginUrl] = useState(localStorage.getItem("prev"))
   const [count, setcount] = useState(0)
   let prevUrl
 
@@ -27,7 +27,7 @@ function Login() {
 
   window.addEventListener('message', function (event) {
 
-    if (event.origin !== 'https://sso-login.dkchei85ij0cu.amplifyapp.com') {
+    if (event.origin !== 'https://sso-login.dkchei85ij0cu.amplifyapp.com' || event.origin !== 'https://sso-login.d3laxofjrudx9j.amplifyapp.com') {
       console.warn('Unauthorized message origin. Ignoring the message.');
       return;
     }
