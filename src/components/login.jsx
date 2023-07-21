@@ -55,8 +55,6 @@ function Login() {
       email: profile.getEmail(),
       idToken,
     };
-
-    const originUrl = localStorage.getItem("prev");
     const message = {
       type: "USER_LOGIN",
       payload: {
