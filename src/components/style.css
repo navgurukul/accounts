@@ -58,13 +58,26 @@ body {
 #login-image {
   cursor: pointer;
 }
+#loading-image{
+    position: absolute;
+    width: 10vw;
+    height: 20vh;
+    top: 40%;
+    left: 45%;
+}
 
 
 @media (max-width: 820px) {
     .container {
         width: 700.5px;
-        height: 650px;
-        
+        height: 650px;  
+    }
+
+    #loading-image{
+        width: 15vw;
+        height: 22vh;
+        top: 40%;
+        left: 45%;
     }
 
     #ng-logo {

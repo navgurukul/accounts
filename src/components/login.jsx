@@ -4,10 +4,12 @@ import './style.css'
 import backgroundImg from './assets/background.png'
 import logo from './assets/logo.svg';
 import googleImg from './assets/google.svg'
+import loader from './assets/loader.gif'
 
 function Login() {
   let [originUrl, setOriginUrl] = useState(localStorage.getItem("prev"));
   const [count, setcount] = useState(0);
+  const [loading, setLoading] = useState(false)
   let prevUrl;
 
   useEffect(() => {
@@ -59,6 +61,7 @@ function Login() {
         userDetails: googleData,
       },
     };
+    setLoading(true)
     const iframeLoadHandler = () => {
       const iframe = document.querySelector("#scratchiFrame");
       const window = iframe.contentWindow;
@@ -85,45 +88,49 @@ function Login() {
 
   return (
     <>
-      <div className="container">
-        <img id="backgroundImg" src={backgroundImg} alt="" />
-        <div id="login-container">
+      {
+        loading ?
+          <img src={loader} alt="loader" id="loading-image"/> :
+          <div className="container">
+            <img id="backgroundImg" src={backgroundImg} alt="" />
+            <div id="login-container">
+              <img id="ng-logo" src={logo} alt="" />
+              <h2 id="learn-heading">Embark On Your Learning Journey</h2>
 
-          <img id="ng-logo" src={logo} alt="" />
-          <h2 id="learn-heading">Embark On Your Learning Journey</h2>
+              <h5>Continue to Meraki</h5>
+              <GoogleLogin
+                clientId="34917283366-b806koktimo2pod1cjas8kn2lcpn7bse.apps.googleusercontent.com"
+                buttonText="Log In with Google "
+                onSuccess={onSignIn}
+                render={(renderProps) => (
+                  <button
+                    variant="contained"
+                    onClick={renderProps.onClick}
+                    id="login-button"
+                  >
+                    <img id="login-image" src={googleImg} alt="" />
+                  </button>
+                )}
+                cookiePolicy={"single_host_origin"}
+              />
 
-          <h5>Continue to Meraki</h5>
-          <GoogleLogin
-            clientId="34917283366-b806koktimo2pod1cjas8kn2lcpn7bse.apps.googleusercontent.com"
-            buttonText="Log In with Google "
-            onSuccess={onSignIn}
-            render={(renderProps) => (
-              <button
-                variant="contained"
-                onClick={renderProps.onClick}
-                id="login-button"
-              >
-                <img id="login-image" src={googleImg} alt="" />
-              </button>
-            )}
-            cookiePolicy={"single_host_origin"}
-          />
+            </div>
+            <iframe
 
-        </div>
-        <iframe
+              id="scratchiFrame"
+              src="https://sso-login.d3laxofjrudx9j.amplifyapp.com/login"
+              title="Scratch"
+            ></iframe>
+            <iframe
 
-          id="scratchiFrame"
-          src="https://sso-login.d3laxofjrudx9j.amplifyapp.com/login"
-          title="Scratch"
-        ></iframe>
-        <iframe
+              id="merakiiFrame"
+              src="https://sso-login.dkchei85ij0cu.amplifyapp.com/"
+              title="Meraki"
+            ></iframe>
 
-          id="merakiiFrame"
-          src="https://sso-login.dkchei85ij0cu.amplifyapp.com/"
-          title="Meraki"
-        ></iframe>
+          </div>
+      }
 
-      </div>
     </>
   );
 }
