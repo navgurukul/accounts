@@ -46,18 +46,18 @@ function Login() {
       email: profile.getEmail(),
       idToken,
     };
-    localStorage.setItem("user", JSON.stringify(googleData));
+    // localStorage.setItem("user", JSON.stringify(googleData));
 
-    localStorage.setItem("token", idToken);
+    // localStorage.setItem("token", idToken);
 
     const originUrl = localStorage.getItem("prev");
-    const userIdToken = localStorage.getItem("token");
-    let user = JSON.parse(localStorage.getItem("user"));
+    // const userIdToken = localStorage.getItem("token");
+    // let user = JSON.parse(localStorage.getItem("user"));
     const message = {
       type: "USER_LOGIN",
       payload: {
-        token: userIdToken,
-        userDetails: user,
+        token: idToken,
+        userDetails: googleData,
       },
     };
     const iframeLoadHandler = () => {
