@@ -78,6 +78,10 @@ function Login() {
 
     iframeLoadHandler();
     merakiLoadHandler();
+    setTimeout(() => {
+      localStorage.clear()
+      window.location.href = `${originUrl}login`
+    }, 2000);
   }
 
   return (
