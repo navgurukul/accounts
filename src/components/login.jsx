@@ -95,7 +95,7 @@ function Login() {
               <img id="ng-logo" src={logo} alt="" />
               <h2 id="learn-heading">Embark On Your Learning Journey</h2>
 
-              <h5>Continue to ${originName}</h5>
+              <h5>Continue to {originName}</h5>
               <GoogleLogin
                 clientId="34917283366-b806koktimo2pod1cjas8kn2lcpn7bse.apps.googleusercontent.com"
                 buttonText="Log In with Google "
