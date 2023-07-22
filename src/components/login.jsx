@@ -18,8 +18,8 @@ function Login() {
     prevUrl = document.referrer;
     localStorage.setItem("prev", prevUrl);
     setOriginUrl(localStorage.getItem("prev"));
-    console.log( originUrl ,originUrl == 'https://sso-login.d3laxofjrudx9j.amplifyapp.com/', "Console statement ")
-    originUrl =='https://sso-login.d3laxofjrudx9j.amplifyapp.com/'?setOriginName("Scratch"):setOriginName("Meraki")
+    console.log(originUrl, originUrl == 'https://sso-login.d3laxofjrudx9j.amplifyapp.com/', "Console statement ")
+    originUrl == 'https://sso-login.d3laxofjrudx9j.amplifyapp.com/' ? setOriginName("Scratch") : setOriginName("Meraki")
   }, []);
 
   useEffect(() => {
@@ -67,6 +67,7 @@ function Login() {
     };
     setLoading(true)
     const iframeLoadHandler = () => {
+      console.log("iframe of scratch loading")
       const iframe = document.querySelector("#scratchiFrame");
       const window = iframe.contentWindow;
       const targetOrigin = "https://sso-login.d3laxofjrudx9j.amplifyapp.com";
@@ -75,6 +76,7 @@ function Login() {
     };
 
     const merakiLoadHandler = () => {
+      console.log("iframe of scratch loading")
       const iframe = document.querySelector("#merakiiFrame");
       const window = iframe.contentWindow;
       const targetOrigin = "https://sso-login.dkchei85ij0cu.amplifyapp.com/";
@@ -88,45 +90,45 @@ function Login() {
 
   return (
     <>
+         <iframe
+        id="scratchiFrame"
+        src="https://sso-login.d3laxofjrudx9j.amplifyapp.com/login"
+        title="Scratch"
+      ></iframe>
+      <iframe
+        id="merakiiFrame"
+        src="https://sso-login.dkchei85ij0cu.amplifyapp.com/"
+        title="Meraki"
+      ></iframe>
       {
-        
-          <div className="container">
-            <img id="backgroundImg" src={backgroundImg} alt="" />
-            <div id="login-container">
-              <img id="ng-logo" src={logo} alt="" />
-              <h2 id="learn-heading">Embark On Your Learning Journey</h2>
 
-              <h5>Continue to {originName}</h5>
-              <GoogleLogin
-                clientId="34917283366-b806koktimo2pod1cjas8kn2lcpn7bse.apps.googleusercontent.com"
-                buttonText="Log In with Google "
-                onSuccess={onSignIn}
-                render={(renderProps) => (
-                  <button
-                    variant="contained"
-                    onClick={renderProps.onClick}
-                    id="login-button"
-                  >
-                    <img id="login-image" src={googleImg} alt="" />
-                  </button>
-                )}
-                cookiePolicy={"single_host_origin"}
-              />
-            {  loading ?
-          <img src={loader} alt="loader" id="loading-image"/> :null}
-            </div>
+        <div className="container">
+          <img id="backgroundImg" src={backgroundImg} alt="" />
+          <div id="login-container">
+            <img id="ng-logo" src={logo} alt="" />
+            <h2 id="learn-heading">Embark On Your Learning Journey</h2>
+
+            <h5>Continue to {originName}</h5>
+            <GoogleLogin
+              clientId="34917283366-b806koktimo2pod1cjas8kn2lcpn7bse.apps.googleusercontent.com"
+              buttonText="Log In with Google "
+              onSuccess={onSignIn}
+              render={(renderProps) => (
+                <button
+                  variant="contained"
+                  onClick={renderProps.onClick}
+                  id="login-button"
+                >
+                  <img id="login-image" src={googleImg} alt="" />
+                </button>
+              )}
+              cookiePolicy={"single_host_origin"}
+            />
+            {loading ? <img src={loader} alt="loader" id="loading-image" /> : null}
           </div>
+        </div>
       }
-        <iframe
-              id="scratchiFrame"
-              src="https://sso-login.d3laxofjrudx9j.amplifyapp.com/login"
-              title="Scratch"
-            ></iframe>
-            <iframe
-              id="merakiiFrame"
-              src="https://sso-login.dkchei85ij0cu.amplifyapp.com/"
-              title="Meraki"
-            ></iframe>
+ 
     </>
   );
 }
