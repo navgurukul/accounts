@@ -18,6 +18,7 @@ function Login() {
     prevUrl = document.referrer;
     localStorage.setItem("prev", prevUrl);
     setOriginUrl(localStorage.getItem("prev"));
+    console.log( originUrl =='	https://sso-login.d3laxofjrudx9j.amplifyapp.com', "Console statement ")
     originUrl =='	https://sso-login.d3laxofjrudx9j.amplifyapp.com'?setOriginName("Scratch"):setOriginName("Meraki")
   }, []);
 
