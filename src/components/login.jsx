@@ -9,7 +9,7 @@ import loader from './assets/loader.gif'
 function Login() {
   let [originUrl, setOriginUrl] = useState(localStorage.getItem("prev"));
   const [count, setcount] = useState(0);
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
   const [originName, setOriginName] = useState('')
   let prevUrl;
 
