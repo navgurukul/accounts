@@ -27,10 +27,12 @@ function Login() {
       event.origin == "https://sso-login.d3laxofjrudx9j.amplifyapp.com"
     ) {
       setcount((prev) => prev + 1);
-      setTimeout(() => {
-        localStorage.clear()
-        window.location.href = `${originUrl}login`
-      }, 3000);
+      var response = event.data;
+      console.log('Received response from apps:', response);
+      // setTimeout(() => {
+      //   localStorage.clear()
+      //   window.location.href = `${originUrl}login`
+      // }, 3000);
     } else {
       console.warn("Unauthorized application sending response", event.origin);
     }
