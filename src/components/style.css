@@ -1,16 +1,9 @@
-
+#scratchiFrame,
 #merakiiFrame {
-  width: 301px;
-  height: 301px;
+  width: 1px;
+  height: 1px;
   position: absolute;
   right: 0;
-  top: 0;
-}
-#scratchiFrame{
-  width:601px;
-  height: 601px;
-  position: absolute;
-  left: 0;
   top: 0;
 }
 .container {
