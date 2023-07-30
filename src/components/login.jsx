@@ -34,7 +34,7 @@ function Login() {
       setcount((prev) => prev + 1);
       setTimeout(() => {
         localStorage.clear()
-        originUrl == 'https://dashboard-delta-plum.vercel.app/' ? window.location.href = `${originUrl}` : window.location.href = `${originUrl}login`
+        originUrl == 'https://dashboard-delta-plum.vercel.app/' ? window.location.href = `${originUrl}`: window.location.href = `${originUrl}login`
       }, 3000);
     } else {
       console.warn("Unauthorized application sending response", event.origin);
