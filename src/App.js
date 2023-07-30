@@ -3,6 +3,7 @@ import Login from "./components/login";
 
 
 function App() {
+  document.title = "Accounts Navgurukul"
   return (
     <div className="App">
       <Login />
