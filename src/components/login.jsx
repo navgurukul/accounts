@@ -6,16 +6,19 @@ import logo from './assets/logo.svg';
 import googleImg from './assets/google.svg'
 import loader from './assets/loader.gif'
 function Login() {
-  let [originUrl, setOriginUrl] = useState(localStorage.getItem("prev"));
+  let [originUrl, setOriginUrl] = useState("");
   const [count, setcount] = useState(0);
   const [loading, setLoading] = useState(false)
   const [originName, setOriginName] = useState('')
-  let prevUrl;
+  // let prevUrl;
   useEffect(() => {
     localStorage.clear();
-    prevUrl = document.referrer;
-    localStorage.setItem("prev", prevUrl);
-    setOriginUrl(localStorage.getItem("prev"));
+    // prevUrl = document.referrer;
+    // localStorage.setItem("prev", prevUrl);
+  setTimeout(() => {
+    console.log(originUrl, "origin url")
+  }, 2000);  
+    setOriginUrl(document.referrer);
     if (originUrl == 'https://sso-login.d3laxofjrudx9j.amplifyapp.com/') setOriginName("Scratch")
     else if (originUrl == 'https://dashboard-delta-plum.vercel.app/') setOriginName("Partner Dashboard")
     else setOriginName("Meraki")
@@ -34,6 +37,7 @@ function Login() {
       setcount((prev) => prev + 1);
       setTimeout(() => {
         localStorage.clear()
+        console.log(originUrl, "origin url")
         originUrl == 'https://dashboard-delta-plum.vercel.app/' ? window.location.href = `${originUrl}`: window.location.href = `${originUrl}login`
       }, 3000);
     } else {
