@@ -10,14 +10,8 @@ function Login() {
   const [count, setcount] = useState(0);
   const [loading, setLoading] = useState(false)
   const [originName, setOriginName] = useState('')
-  // let prevUrl;
   useEffect(() => {
     localStorage.clear();
-    // prevUrl = document.referrer;
-    // localStorage.setItem("prev", prevUrl);
-  setTimeout(() => {
-    console.log(originUrl, "origin url")
-  }, 2000);  
     setOriginUrl(document.referrer);
     if (originUrl == 'https://sso-login.d3laxofjrudx9j.amplifyapp.com/') setOriginName("Scratch")
     else if (originUrl == 'https://dashboard-delta-plum.vercel.app/') setOriginName("Partner Dashboard")
@@ -25,11 +19,14 @@ function Login() {
   }, [originUrl]);
 
   useEffect(() => {
-    if (count === 3) window.location.href = `${originUrl}login`;
+    if (count === 3) {
+      originUrl == 'https://dashboard-delta-plum.vercel.app/' ? window.location.href = `${originUrl}`: window.location.href = `${originUrl}login`
+    }
   }, [count]);
 
 
   window.addEventListener("message", function (event) {
+    console.log(count, "value of count")
     if (
       event.origin == "https://sso-login.dkchei85ij0cu.amplifyapp.com" ||
       event.origin == "https://sso-login.d3laxofjrudx9j.amplifyapp.com" || event.origin == "https://dashboard-delta-plum.vercel.app"
