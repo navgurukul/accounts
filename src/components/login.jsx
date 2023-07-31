@@ -14,6 +14,7 @@ function Login() {
   //Setting origin name for UI and getting previous url
   useEffect(() => {
     localStorage.clear();
+    console.log(document.referrer, "document origin link")
     setOriginUrl(document.referrer);
     if (originUrl == 'https://sso-login.d3laxofjrudx9j.amplifyapp.com/') setOriginName("Scratch")
     else if (originUrl == 'https://dashboard-delta-plum.vercel.app/') setOriginName("Partner Dashboard")
