@@ -20,7 +20,10 @@ function Login() {
 
   useEffect(() => {
     if (count >= 3) {
-      originUrl == 'https://dashboard-delta-plum.vercel.app/' ? window.location.href = `${originUrl}`: window.location.href = `${originUrl}login`
+      setTimeout(() => {
+        originUrl == 'https://dashboard-delta-plum.vercel.app/' ? window.location.href = `${originUrl}`: window.location.href = `${originUrl}login`
+      }, 1000);
+    
     }
   }, [count]);
 
