@@ -10,6 +10,8 @@ function Login() {
   const [responseCount, setresponseCount] = useState(0);
   const [loading, setLoading] = useState(false)
   const [originName, setOriginName] = useState('')
+
+  //Setting origin name for UI and getting previous url
   useEffect(() => {
     localStorage.clear();
     setOriginUrl(document.referrer);
@@ -18,32 +20,28 @@ function Login() {
     else setOriginName("Meraki")
   }, [originUrl]);
 
+  // for redirection to source
   useEffect(() => {
     if (responseCount >= 3) {
       setTimeout(() => {
-        originUrl == 'https://dashboard-delta-plum.vercel.app/' ? window.location.href = `${originUrl}`: window.location.href = `${originUrl}login`
+        originUrl == 'https://dashboard-delta-plum.vercel.app/' ? window.location.href = `${originUrl}` : window.location.href = `${originUrl}login`
       }, 1000);
-    
+
     }
   }, [responseCount]);
 
-
+  //For gettting response from the apps
   window.addEventListener("message", function (event) {
-  
-    console.log(responseCount, "value of responseCount")
-    if (event.origin == "https://sso-login.dkchei85ij0cu.amplifyapp.com" )  setresponseCount((prev) => prev + 1)
-    if(event.origin == "https://sso-login.d3laxofjrudx9j.amplifyapp.com") setresponseCount((prev) => prev + 1)
-    if(event.origin == "https://dashboard-delta-plum.vercel.app") setresponseCount((prev) => prev + 1)
-   
+    if (event.origin == "https://sso-login.dkchei85ij0cu.amplifyapp.com") setresponseCount((prev) => prev + 1)
+    if (event.origin == "https://sso-login.d3laxofjrudx9j.amplifyapp.com") setresponseCount((prev) => prev + 1)
+    if (event.origin == "https://dashboard-delta-plum.vercel.app") setresponseCount((prev) => prev + 1)
+
     else {
       console.warn("Unauthorized application sending response", event.origin);
     }
   });
 
-  function onSignIn(googleUser) {
-    let { id_token: idToken } = googleUser.getAuthResponse();
-    localStorage.setItem("token", idToken);
-  }
+  //Sign in function
   function onSignIn(googleUser) {
     let { id_token: idToken } = googleUser.getAuthResponse();
     let profile = googleUser.getBasicProfile();
@@ -62,23 +60,21 @@ function Login() {
       },
     };
     setLoading(true)
-const postMessageToIframe = (iframeId, targetOrigin) => {
-  const iframe = document.querySelector(iframeId);
-  if (!iframe) {
-    console.error(`Iframe with ID '${iframeId}' not found.`);
-    return false;
-  }
 
-  const window = iframe.contentWindow;
-  window.postMessage(message, targetOrigin);
-  return true;
-};
-
-// Usage:
-postMessageToIframe("#scratchiFrame", "https://sso-login.d3laxofjrudx9j.amplifyapp.com/");
-postMessageToIframe("#merakiiFrame", "https://sso-login.dkchei85ij0cu.amplifyapp.com/");
-postMessageToIframe("#dashboardiframe", "https://dashboard-delta-plum.vercel.app/");
-
+    //posting message function 
+    const postMessageToIframe = (iframeId, targetOrigin) => {
+      const iframe = document.querySelector(iframeId);
+      if (!iframe) {
+        console.error(`Iframe with ID '${iframeId}' not found.`);
+        return false;
+      }
+      const window = iframe.contentWindow;
+      window.postMessage(message, targetOrigin);
+      return true;
+    };
+    postMessageToIframe("#scratchiFrame", "https://sso-login.d3laxofjrudx9j.amplifyapp.com/");
+    postMessageToIframe("#merakiiFrame", "https://sso-login.dkchei85ij0cu.amplifyapp.com/");
+    postMessageToIframe("#dashboardiframe", "https://dashboard-delta-plum.vercel.app/");
   }
   return (
     <>
