@@ -32,6 +32,7 @@ function Login() {
       event.origin == "https://sso-login.d3laxofjrudx9j.amplifyapp.com" || event.origin == "https://dashboard-delta-plum.vercel.app"
     ) {
       setcount((prev) => prev + 1);
+      console.log(event.origin, "origin of message")
       console.log(count, "value of count")
       setTimeout(() => {
         localStorage.clear()
