@@ -20,7 +20,7 @@ function Login() {
 
   useEffect(() => {
     if (count >= 3) {
-      originUrl == 'https://dashboard-delta-plum.vercel.app/' ? window.location.href = `${originUrl}`: window.location.href = `${originUrl}login`
+      // originUrl == 'https://dashboard-delta-plum.vercel.app/' ? window.location.href = `${originUrl}`: window.location.href = `${originUrl}login`
     }
   }, [count]);
 
@@ -34,8 +34,8 @@ function Login() {
       setcount((prev) => prev + 1);
       setTimeout(() => {
         localStorage.clear()
-        console.log(originUrl, "origin url")
-        originUrl == 'https://dashboard-delta-plum.vercel.app/' ? window.location.href = `${originUrl}`: window.location.href = `${originUrl}login`
+        console.log(originUrl, count, "count value ", "origin url")
+        // originUrl == 'https://dashboard-delta-plum.vercel.app/' ? window.location.href = `${originUrl}`: window.location.href = `${originUrl}login`
       }, 3000);
     } else {
       console.warn("Unauthorized application sending response", event.origin);
