@@ -27,19 +27,18 @@ function Login() {
 
   window.addEventListener("message", function (event) {
   
-    if (
-      event.origin == "https://sso-login.dkchei85ij0cu.amplifyapp.com" ||
-      event.origin == "https://sso-login.d3laxofjrudx9j.amplifyapp.com" || event.origin == "https://dashboard-delta-plum.vercel.app"
-    ) {
-      setcount((prev) => prev + 1);
+    console.log(count, "value of count")
+    if (event.origin == "https://sso-login.dkchei85ij0cu.amplifyapp.com" )  setcount((prev) => prev + 1)
+    if(event.origin == "https://sso-login.d3laxofjrudx9j.amplifyapp.com") setcount((prev) => prev + 1)
+    if(event.origin == "https://dashboard-delta-plum.vercel.app") setcount((prev) => prev + 1)
       // console.log(event.origin, "origin of message")
-      // console.log(count, "value of count")
-      setTimeout(() => {
-        localStorage.clear()
-        console.log(originUrl, count, "count value ", "origin url")
-        originUrl == 'https://dashboard-delta-plum.vercel.app/' ? window.location.href = `${originUrl}`: window.location.href = `${originUrl}login`
-      }, 3000);
-    } else {
+      
+      // setTimeout(() => {
+      //   localStorage.clear()
+      //   console.log(originUrl, count, "count value ", "origin url")
+      //   originUrl == 'https://dashboard-delta-plum.vercel.app/' ? window.location.href = `${originUrl}`: window.location.href = `${originUrl}login`
+      // }, 3000);
+    else {
       console.warn("Unauthorized application sending response", event.origin);
     }
   });
