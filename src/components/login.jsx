@@ -115,7 +115,7 @@ postMessageToIframe("#dashboardiframe", "https://dashboard-delta-plum.vercel.app
       }
       <iframe
         id="scratchiFrame"
-        src="https://sso-login.d3laxofjrudx9j.amplifyapp.com/login"
+        src="https://sso-login.d3laxofjrudx9j.amplifyapp.com"
         title="Scratch"
       ></iframe>
       <iframe
