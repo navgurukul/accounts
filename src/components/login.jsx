@@ -26,12 +26,13 @@ function Login() {
 
 
   window.addEventListener("message", function (event) {
-    console.log(count, "value of count")
+  
     if (
       event.origin == "https://sso-login.dkchei85ij0cu.amplifyapp.com" ||
       event.origin == "https://sso-login.d3laxofjrudx9j.amplifyapp.com" || event.origin == "https://dashboard-delta-plum.vercel.app"
     ) {
       setcount((prev) => prev + 1);
+      console.log(count, "value of count")
       setTimeout(() => {
         localStorage.clear()
         console.log(originUrl, count, "count value ", "origin url")
