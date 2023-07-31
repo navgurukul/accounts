@@ -32,12 +32,12 @@ function Login() {
       event.origin == "https://sso-login.d3laxofjrudx9j.amplifyapp.com" || event.origin == "https://dashboard-delta-plum.vercel.app"
     ) {
       setcount((prev) => prev + 1);
-      console.log(event.origin, "origin of message")
-      console.log(count, "value of count")
+      // console.log(event.origin, "origin of message")
+      // console.log(count, "value of count")
       setTimeout(() => {
         localStorage.clear()
         console.log(originUrl, count, "count value ", "origin url")
-        // originUrl == 'https://dashboard-delta-plum.vercel.app/' ? window.location.href = `${originUrl}`: window.location.href = `${originUrl}login`
+        originUrl == 'https://dashboard-delta-plum.vercel.app/' ? window.location.href = `${originUrl}`: window.location.href = `${originUrl}login`
       }, 3000);
     } else {
       console.warn("Unauthorized application sending response", event.origin);
@@ -66,30 +66,23 @@ function Login() {
       },
     };
     setLoading(true)
-    const iframeLoadHandler = () => {
-      const iframe = document.querySelector("#scratchiFrame");
-      const window = iframe.contentWindow;
-      const targetOrigin = "https://sso-login.d3laxofjrudx9j.amplifyapp.com";
-      window.postMessage(message, targetOrigin);
-      return true;
-    };
-    const merakiLoadHandler = () => {
-      const iframe = document.querySelector("#merakiiFrame");
-      const window = iframe.contentWindow;
-      const targetOrigin = "https://sso-login.dkchei85ij0cu.amplifyapp.com/";
-      window.postMessage(message, targetOrigin);
-      return true;
-    };
-    const partnerLoadHandler = () => {
-      const iframe = document.querySelector("#dashboardiframe");
-      const window = iframe.contentWindow;
-      const targetOrigin = "https://dashboard-delta-plum.vercel.app/";
-      window.postMessage(message, targetOrigin);
-      return true;
-    };
-    iframeLoadHandler();
-    merakiLoadHandler();
-    partnerLoadHandler()
+const postMessageToIframe = (iframeId, targetOrigin) => {
+  const iframe = document.querySelector(iframeId);
+  if (!iframe) {
+    console.error(`Iframe with ID '${iframeId}' not found.`);
+    return false;
+  }
+
+  const window = iframe.contentWindow;
+  window.postMessage(message, targetOrigin);
+  return true;
+};
+
+// Usage:
+postMessageToIframe("#scratchiFrame", "https://sso-login.d3laxofjrudx9j.amplifyapp.com");
+postMessageToIframe("#merakiiFrame", "https://sso-login.dkchei85ij0cu.amplifyapp.com/");
+postMessageToIframe("#dashboardiframe", "https://dashboard-delta-plum.vercel.app/");
+
   }
   return (
     <>
