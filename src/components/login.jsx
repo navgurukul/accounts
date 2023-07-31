@@ -19,7 +19,7 @@ function Login() {
   }, [originUrl]);
 
   useEffect(() => {
-    if (count <= 3) {
+    if (count >= 3) {
       originUrl == 'https://dashboard-delta-plum.vercel.app/' ? window.location.href = `${originUrl}`: window.location.href = `${originUrl}login`
     }
   }, [count]);
