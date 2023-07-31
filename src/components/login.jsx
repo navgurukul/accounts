@@ -74,12 +74,13 @@ const postMessageToIframe = (iframeId, targetOrigin) => {
   }
 
   const window = iframe.contentWindow;
+  const message = "Your message goes here"; // Replace this with the actual message you want to send
   window.postMessage(message, targetOrigin);
   return true;
 };
 
 // Usage:
-postMessageToIframe("#scratchiFrame", "https://sso-login.d3laxofjrudx9j.amplifyapp.com");
+postMessageToIframe("#scratchiFrame", "https://sso-login.d3laxofjrudx9j.amplifyapp.com/");
 postMessageToIframe("#merakiiFrame", "https://sso-login.dkchei85ij0cu.amplifyapp.com/");
 postMessageToIframe("#dashboardiframe", "https://dashboard-delta-plum.vercel.app/");
 
