@@ -74,7 +74,6 @@ const postMessageToIframe = (iframeId, targetOrigin) => {
   }
 
   const window = iframe.contentWindow;
-  const message = "Your message goes here"; // Replace this with the actual message you want to send
   window.postMessage(message, targetOrigin);
   return true;
 };
