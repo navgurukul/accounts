@@ -25,7 +25,7 @@ function Login() {
   useEffect(() => {
     if (responseCount >= 3) {
       setTimeout(() => {
-        originUrl == 'https://dashboard-delta-plum.vercel.app/' ? window.location.href = `${originUrl}` : window.location.href = `${originUrl}login`
+        originUrl == 'https://partner-dashboard-dev.vercel.app/' ? window.location.href = `${originUrl}` : window.location.href = `${originUrl}login`
       }, 1000);
 
     }
