@@ -17,7 +17,7 @@ function Login() {
     console.log(document.referrer, "document origin link")
     setOriginUrl(document.referrer);
     if (originUrl == 'https://sso-login.d3laxofjrudx9j.amplifyapp.com/') setOriginName("Scratch")
-    else if (originUrl == 'https://dashboard-delta-plum.vercel.app/') setOriginName("Partner Dashboard")
+    else if (originUrl == 'https://partner-dashboard-dev.vercel.app/') setOriginName("Partner Dashboard")
     else setOriginName("Meraki")
   }, [originUrl]);
 
