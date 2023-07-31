@@ -7,7 +7,7 @@ import googleImg from './assets/google.svg'
 import loader from './assets/loader.gif'
 function Login() {
   let [originUrl, setOriginUrl] = useState("");
-  const [count, setcount] = useState(0);
+  const [responseCount, setresponseCount] = useState(0);
   const [loading, setLoading] = useState(false)
   const [originName, setOriginName] = useState('')
   useEffect(() => {
@@ -19,28 +19,22 @@ function Login() {
   }, [originUrl]);
 
   useEffect(() => {
-    if (count >= 3) {
+    if (responseCount >= 3) {
       setTimeout(() => {
         originUrl == 'https://dashboard-delta-plum.vercel.app/' ? window.location.href = `${originUrl}`: window.location.href = `${originUrl}login`
       }, 1000);
     
     }
-  }, [count]);
+  }, [responseCount]);
 
 
   window.addEventListener("message", function (event) {
   
-    console.log(count, "value of count")
-    if (event.origin == "https://sso-login.dkchei85ij0cu.amplifyapp.com" )  setcount((prev) => prev + 1)
-    if(event.origin == "https://sso-login.d3laxofjrudx9j.amplifyapp.com") setcount((prev) => prev + 1)
-    if(event.origin == "https://dashboard-delta-plum.vercel.app") setcount((prev) => prev + 1)
-      // console.log(event.origin, "origin of message")
-      
-      // setTimeout(() => {
-      //   localStorage.clear()
-      //   console.log(originUrl, count, "count value ", "origin url")
-      //   originUrl == 'https://dashboard-delta-plum.vercel.app/' ? window.location.href = `${originUrl}`: window.location.href = `${originUrl}login`
-      // }, 3000);
+    console.log(responseCount, "value of responseCount")
+    if (event.origin == "https://sso-login.dkchei85ij0cu.amplifyapp.com" )  setresponseCount((prev) => prev + 1)
+    if(event.origin == "https://sso-login.d3laxofjrudx9j.amplifyapp.com") setresponseCount((prev) => prev + 1)
+    if(event.origin == "https://dashboard-delta-plum.vercel.app") setresponseCount((prev) => prev + 1)
+   
     else {
       console.warn("Unauthorized application sending response", event.origin);
     }
