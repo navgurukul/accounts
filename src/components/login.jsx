@@ -34,7 +34,7 @@ function Login() {
   window.addEventListener("message", function (event) {
     if (event.origin == "https://sso-login.dkchei85ij0cu.amplifyapp.com") setresponseCount((prev) => prev + 1)
     if (event.origin == "https://sso-login.d3laxofjrudx9j.amplifyapp.com") setresponseCount((prev) => prev + 1)
-    if (event.origin == "https://dashboard-delta-plum.vercel.app") setresponseCount((prev) => prev + 1)
+    if (event.origin == "https://partner-dashboard-dev.vercel.app/") setresponseCount((prev) => prev + 1)
 
     else {
       console.warn("Unauthorized application sending response", event.origin);
@@ -74,7 +74,7 @@ function Login() {
     };
     postMessageToIframe("#scratchiFrame", "https://sso-login.d3laxofjrudx9j.amplifyapp.com/");
     postMessageToIframe("#merakiiFrame", "https://sso-login.dkchei85ij0cu.amplifyapp.com/");
-    postMessageToIframe("#dashboardiframe", "https://dashboard-delta-plum.vercel.app/");
+    postMessageToIframe("#dashboardiframe", "https://partner-dashboard-dev.vercel.app/");
   }
   return (
     <>
@@ -117,7 +117,7 @@ function Login() {
       ></iframe>
       <iframe
         id="dashboardiframe"
-        src="https://dashboard-delta-plum.vercel.app/"
+        src="https://partner-dashboard-dev.vercel.app/"
         title="Meraki"
       ></iframe>
     </>
