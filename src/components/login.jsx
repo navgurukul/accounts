@@ -25,7 +25,7 @@ function Login() {
   useEffect(() => {
     if (responseCount >= 3) {
       setTimeout(() => {
-        originUrl == 'https://partner-dashboard-dev.vercel.app/' ? window.location.href = `${originUrl}` : window.location.href = `${originUrl}login`
+        originUrl == 'https://partner-dashboard-dev.vercel.app/'|| "http://localhost:3000/" ? window.location.href = `${originUrl}` : window.location.href = `${originUrl}login`
       }, 1000);
 
     }
@@ -36,6 +36,7 @@ function Login() {
     if (event.origin == "https://sso-login.dkchei85ij0cu.amplifyapp.com") setresponseCount((prev) => prev + 1)
     if (event.origin == "https://sso-login.d3laxofjrudx9j.amplifyapp.com") setresponseCount((prev) => prev + 1)
     if (event.origin == "https://partner-dashboard-dev.vercel.app/") setresponseCount((prev) => prev + 1)
+    if (event.origin == "http://localhost:3000/") setresponseCount((prev) => prev + 1)
 
     else {
       console.warn("Unauthorized application sending response", event.origin);
@@ -76,6 +77,7 @@ function Login() {
     postMessageToIframe("#scratchiFrame", "https://sso-login.d3laxofjrudx9j.amplifyapp.com/");
     postMessageToIframe("#merakiiFrame", "https://sso-login.dkchei85ij0cu.amplifyapp.com/");
     postMessageToIframe("#dashboardiframe", "https://partner-dashboard-dev.vercel.app/");
+    postMessageToIframe("#localiframe", "http://localhost:3000/");
   }
   return (
     <>
@@ -119,6 +121,11 @@ function Login() {
       <iframe
         id="dashboardiframe"
         src="https://partner-dashboard-dev.vercel.app/"
+        title="Meraki"
+      ></iframe>
+         <iframe
+        id="localiframe"
+        src="http://localhost:3000/"
         title="Meraki"
       ></iframe>
     </>
