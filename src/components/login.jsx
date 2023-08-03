@@ -23,7 +23,7 @@ function Login() {
 
   // for redirection to source
   useEffect(() => {
-    if (responseCount >= 5) {
+    if (responseCount >= 4) {
       setTimeout(() => {
         originUrl == 'https://partner-dashboard-dev.vercel.app/'|| "http://localhost:3000/" ? window.location.href = `${originUrl}` : window.location.href = `${originUrl}login`
       }, 1000);
@@ -79,7 +79,7 @@ function Login() {
     postMessageToIframe("#merakiiFrame", "https://sso-login.dkchei85ij0cu.amplifyapp.com/");
     postMessageToIframe("#dashboardiframe", "https://partner-dashboard-dev.vercel.app/");
     postMessageToIframe("#localiframe", "http://localhost:3000/");
-    postMessageToIframe("#localiframe", "http://localhost:5173/");
+    postMessageToIframe("#partnerlocal", "http://localhost:5173/");
   }
   return (
     <>
@@ -131,7 +131,7 @@ function Login() {
         title="Meraki"
       ></iframe>
           <iframe
-        id="localiframe"
+        id="partnerlocal"
         src="http://localhost:5173/"
         title="Meraki"
       ></iframe>
