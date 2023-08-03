@@ -78,6 +78,7 @@ function Login() {
     postMessageToIframe("#merakiiFrame", "https://sso-login.dkchei85ij0cu.amplifyapp.com/");
     postMessageToIframe("#dashboardiframe", "https://partner-dashboard-dev.vercel.app/");
     postMessageToIframe("#localiframe", "http://localhost:3000/");
+    postMessageToIframe("#localiframe", "http://localhost:5173/");
   }
   return (
     <>
@@ -126,6 +127,11 @@ function Login() {
          <iframe
         id="localiframe"
         src="http://localhost:3000/"
+        title="Meraki"
+      ></iframe>
+          <iframe
+        id="localiframe"
+        src="http://localhost:5173/"
         title="Meraki"
       ></iframe>
     </>
