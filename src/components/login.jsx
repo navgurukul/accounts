@@ -66,14 +66,14 @@ function Login() {
     postMessageToIframe("#scratchiFrame", "https://sso-login.d3laxofjrudx9j.amplifyapp.com/");
     postMessageToIframe("#merakiiFrame", "https://sso-login.dkchei85ij0cu.amplifyapp.com/");
     postMessageToIframe("#dashboardiframe", "https://partner-dashboard-dev.vercel.app/");
-    postMessageToIframe("#localiframe", "http://localhost:3000/");
-    postMessageToIframe("#partnerlocal", "http://localhost:5173/");
+    // postMessageToIframe("#localiframe", "http://localhost:3000/");
+    // postMessageToIframe("#partnerlocal", "http://localhost:5173/");
   };
 
 
   // for redirection to source
   useEffect(() => {
-    if (responseCount >= 4) {
+    if (responseCount >= 3) {
       setTimeout(() => {
         originUrl == 'https://partner-dashboard-dev.vercel.app/' || "http://localhost:3000/" ? window.location.href = `${originUrl}` : window.location.href = `${originUrl}login`
       }, 1000);
@@ -166,7 +166,7 @@ function Login() {
         src="https://partner-dashboard-dev.vercel.app/"
         title="Meraki"
       ></iframe>
-      <iframe
+      {/* <iframe
         id="localiframe"
         src="http://localhost:3000/"
         title="Meraki"
@@ -175,7 +175,7 @@ function Login() {
         id="partnerlocal"
         src="http://localhost:5173/"
         title="Meraki"
-      ></iframe>
+      ></iframe> */}
     </>
   );
 }
