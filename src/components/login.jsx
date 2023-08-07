@@ -1,3 +1,4 @@
+/* global google */
 import React, { useEffect, useState } from "react";
 import GoogleLogin from "react-google-login";
 import './style.css'
@@ -19,13 +20,62 @@ function Login() {
     if (originUrl == 'https://sso-login.d3laxofjrudx9j.amplifyapp.com/') setOriginName("Scratch")
     else if (originUrl == 'https://partner-dashboard-dev.vercel.app/') setOriginName("Partner Dashboard")
     else setOriginName("Meraki")
+
   }, [originUrl]);
+
+
+  //posting message function 
+  useEffect(() => {
+    google.accounts.id.initialize({
+      client_id: "734424141181-508773k06uc88bdc9h4jrbpsgfpdv1ph.apps.googleusercontent.com",
+      callback: handleCallbackResponse,
+    });
+
+    google.accounts.id.renderButton(document.getElementById("signInDiv"), {
+      theme: "outline",
+      width: 200, size: "large"
+    });
+  }, []);
+
+
+  const handleCallbackResponse = (response) => {
+    console.log("encoded data JWT: " + response.credential);
+
+    let idToken = response.credential;
+    let googleData = { a: "dummy data to be extracted at the receiver's end" }
+    const message = {
+      type: "USER_LOGIN",
+      payload: {
+        token: idToken,
+        userDetails: googleData,
+      },
+    };
+
+    const postMessageToIframe = (iframeId, targetOrigin) => {
+      const iframe = document.querySelector(iframeId);
+      if (!iframe) {
+        console.error(`Iframe with ID '${iframeId}' not found.`);
+        return false;
+      }
+      const window = iframe.contentWindow;
+      window.postMessage(message, targetOrigin);
+      return true;
+    };
+
+
+    postMessageToIframe("#scratchiFrame", "https://sso-login.d3laxofjrudx9j.amplifyapp.com/");
+    postMessageToIframe("#merakiiFrame", "https://sso-login.dkchei85ij0cu.amplifyapp.com/");
+    postMessageToIframe("#dashboardiframe", "https://partner-dashboard-dev.vercel.app/");
+    postMessageToIframe("#localiframe", "http://localhost:3000/");
+    postMessageToIframe("#partnerlocal", "http://localhost:5173/");
+  };
+
 
   // for redirection to source
   useEffect(() => {
     if (responseCount >= 4) {
       setTimeout(() => {
-        originUrl == 'https://partner-dashboard-dev.vercel.app/'|| "http://localhost:3000/" ? window.location.href = `${originUrl}` : window.location.href = `${originUrl}login`
+        originUrl == 'https://partner-dashboard-dev.vercel.app/' || "http://localhost:3000/" ? window.location.href = `${originUrl}` : window.location.href = `${originUrl}login`
       }, 1000);
 
     }
@@ -45,42 +95,32 @@ function Login() {
   });
 
   //Sign in function
-  function onSignIn(googleUser) {
-    let { id_token: idToken } = googleUser.getAuthResponse();
-    let profile = googleUser.getBasicProfile();
-    const googleData = {
-      id: profile.getId(),
-      name: profile.getName(),
-      imageUrl: profile.getImageUrl(),
-      email: profile.getEmail(),
-      idToken,
-    };
-    const message = {
-      type: "USER_LOGIN",
-      payload: {
-        token: idToken,
-        userDetails: googleData,
-      },
-    };
-    setLoading(true)
+  // function onSignIn(googleUser) {
+  //   let { id_token: idToken } = googleUser.getAuthResponse();
+  //   let profile = googleUser.getBasicProfile();
+  //   const googleData = {
+  //     id: profile.getId(),
+  //     name: profile.getName(),
+  //     imageUrl: profile.getImageUrl(),
+  //     email: profile.getEmail(),
+  //     idToken,
+  //   };
+  //   const message = {
+  //     type: "USER_LOGIN",
+  //     payload: {
+  //       token: idToken,
+  //       userDetails: googleData,
+  //     },
+  //   };
+  //   setLoading(true)
 
-    //posting message function 
-    const postMessageToIframe = (iframeId, targetOrigin) => {
-      const iframe = document.querySelector(iframeId);
-      if (!iframe) {
-        console.error(`Iframe with ID '${iframeId}' not found.`);
-        return false;
-      }
-      const window = iframe.contentWindow;
-      window.postMessage(message, targetOrigin);
-      return true;
-    };
-    postMessageToIframe("#scratchiFrame", "https://sso-login.d3laxofjrudx9j.amplifyapp.com/");
-    postMessageToIframe("#merakiiFrame", "https://sso-login.dkchei85ij0cu.amplifyapp.com/");
-    postMessageToIframe("#dashboardiframe", "https://partner-dashboard-dev.vercel.app/");
-    postMessageToIframe("#localiframe", "http://localhost:3000/");
-    postMessageToIframe("#partnerlocal", "http://localhost:5173/");
-  }
+
+  //   postMessageToIframe("#scratchiFrame", "https://sso-login.d3laxofjrudx9j.amplifyapp.com/");
+  //   postMessageToIframe("#merakiiFrame", "https://sso-login.dkchei85ij0cu.amplifyapp.com/");
+  //   postMessageToIframe("#dashboardiframe", "https://partner-dashboard-dev.vercel.app/");
+  //   postMessageToIframe("#localiframe", "http://localhost:3000/");
+  //   postMessageToIframe("#partnerlocal", "http://localhost:5173/");
+  // }
   return (
     <>
       {
@@ -90,7 +130,7 @@ function Login() {
             <img id="ng-logo" src={logo} alt="" />
             <h2 id="learn-heading">Embark On Your Learning Journey</h2>
             <h5>Continue to {originName}</h5>
-            <GoogleLogin
+            {/* <GoogleLogin
               clientId="34917283366-b806koktimo2pod1cjas8kn2lcpn7bse.apps.googleusercontent.com"
               buttonText="Log In with Google "
               onSuccess={onSignIn}
@@ -104,7 +144,8 @@ function Login() {
                 </button>
               )}
               cookiePolicy={"single_host_origin"}
-            />
+            /> */}
+            <div id="signInDiv" className="custom-google-button" >Login with Google</div>
             {loading ?
               <img src={loader} alt="loader" id="loading-image" /> : null}
           </div>
@@ -125,12 +166,12 @@ function Login() {
         src="https://partner-dashboard-dev.vercel.app/"
         title="Meraki"
       ></iframe>
-         <iframe
+      <iframe
         id="localiframe"
         src="http://localhost:3000/"
         title="Meraki"
       ></iframe>
-          <iframe
+      <iframe
         id="partnerlocal"
         src="http://localhost:5173/"
         title="Meraki"
